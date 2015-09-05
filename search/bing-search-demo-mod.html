@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title></title>
+    <meta http-equiv="X-UA-COMPATIBLE" CONTENT="IE=edge">
+    <style type="text/css">
+        body {
+            background-color: #333;
+        }
+
+        .bg-div {
+            background-image: url(river.jpg);
+            width: 1228px;
+            height: 690px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo {
+            margin: -4px 18px 0 0;
+            background-image: url(logo.png);
+            width: 107px;
+            height: 53px;
+            float: left;
+        }
+
+        .search-form {
+            float: left;
+            background-color: #fff;
+            padding: 5px;
+        }
+
+        .search-input-text {
+            border: 0;
+            float: left;
+            height: 25px;
+            line-height: 25px;
+            outline: none;
+            width: 350px;
+        }
+
+        .search-input-button {
+            float: left;
+            background-image: url(search-button.png);
+            width: 29px;
+            height: 29px;
+            cursor: pointer;
+            border: 0;
+        }
+
+        .search-box {
+            position: absolute;
+            top: 150px;
+            left: 200px;
+        }
+
+        .suggest {
+            width: 388px;
+            border: 1px solid #999;
+            background-color: #ffffff;
+        }
+
+        .suggest ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .suggest ul li {
+            padding: 3px;
+            font-size: 14px;
+            line-height: 25px;
+            cursor: pointer;
+        }
+
+        .suggest ul li:hover {
+            text-decoration: underline;
+            background-color: #e5e5e5;
+        }
+
+    </style>
+</head>
+<body>
+<div class="bg-div">
+    <div class="search-box">
+        <div class="logo"></div>
+        <form id="search-form" class="search-form">
+            <input type="text" name="q" id="search_input" autocomplete="off" class="search-input-text"/>
+            <input type="submit" value="" class="search-input-button"/>
+        </form>
+    </div>
+</div>
+<div class="suggest" id="search-suggest" style="display: none;">
+    <ul>
+        <li>搜索结果1</li>
+        <li>搜索结果2</li>
+        <li>搜索结果3</li>
+    </ul>
+</div>
+</body>
+</html>
