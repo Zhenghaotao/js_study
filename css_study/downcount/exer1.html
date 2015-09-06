@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <canvas id="canvas" width="1024" height="768" style="border: 1px solid #aaa;display: block;margin: 50px auto;"></canvas>
+
+</body>
+<script type="text/javascript">
+    window.onload = function(){
+        var canvas = document.getElementById('canvas');
+
+        var context = canvas.getContext('2d');
+        //使用context绘制
+        if(context){
+            //支持
+            context.moveTo(100,100);
+            context.lineTo(700,700);
+            context.lineTo(100,700);
+            context.lineTo(100,100);
+            context.lineWidth = 5;
+            context.strokeStyle = "#005588";
+            context.stroke();//笔画
+        }else{
+            //浏览器不支持
+
+        }
+
+    }
+
+
+</script>
+</html>
