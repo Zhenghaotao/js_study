@@ -4,7 +4,8 @@ var RADIUS = 8;
 var MARGIN_TOP = 60;
 var MARGIN_LEFT = 30;
 
-const endTime = new Date(2015, 8, 6, 18, 47, 52);//设置定时时间，注意月份数字比实际的小1 ，比如1 代表1月而不是2月
+const endTime = new Date();//设置定时时间，注意月份数字比实际的小1 ，比如1 代表1月而不是2月
+endTime.setTime(endTime.getTime() + 3600 * 1000);
 var curShowTimeSeconds = 0;//当前时间
 
 var balls = [];
@@ -12,11 +13,21 @@ const colors = ["#33B5E5", "#0099CC", "#AA66CC", "#9933CC", "#99CC00", "#669900"
 
 
 window.onload = function () {
+
+    //WINDOW_WIDTH = document.body.clientWidth
+    //WINDOW_HEIGHT = document.body.clientHeight
+    //
+    //MARGIN_LEFT = Math.round(WINDOW_WIDTH /10);
+    //RADIUS = Math.round(WINDOW_WIDTH * 4 / 5 / 108)-1
+    //
+    //MARGIN_TOP = Math.round(WINDOW_HEIGHT /5);
+
     var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
+    var context = canvas.getContext("2d");
 
     canvas.width = WINDOW_WIDTH;
     canvas.height = WINDOW_HEIGHT;
+
 
 
     curShowTimeSeconds = getCurrentShowTimeSeconds();
@@ -27,7 +38,7 @@ window.onload = function () {
         }, 50
     );
 }
-
+//更新变化
 function update() {
     var nextShowTimeSeconds = getCurrentShowTimeSeconds();
 
@@ -66,7 +77,7 @@ function update() {
     }
     updateBalls();
 }
-
+//更新每个球的状态
 function updateBalls(){
     for(var i = 0; i < balls.length; i++){
         balls[i].x += balls[i].vx;
@@ -77,6 +88,17 @@ function updateBalls(){
             balls[i].vy = - balls[i].vy*0.75;
         }
     }
+    var cnt = 0
+    for(var i = 0; i < balls.length; i++){
+        if(balls[i].x + RADIUS > 0 && balls[i].x - RADIUS < WINDOW_WIDTH){
+            balls[cnt++] = balls[i];
+        }
+    }
+    while(balls.length > Math.min(300,cnt)){
+        balls.pop();
+    }
+    console.log(balls.length);
+
 
 }
 
@@ -107,9 +129,9 @@ function getCurrentShowTimeSeconds() {
 
     return ret >= 0 ? ret : 0;
 }
-
+//渲染画面
 function render(ctx) {
-    ctx.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);//刷新
+    ctx.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);//清除所有画面
     var hours = parseInt(curShowTimeSeconds / 3600);
     var minutes = parseInt((curShowTimeSeconds - hours * 3600) / 60);
     var seconds = parseInt(curShowTimeSeconds % 60);
@@ -133,11 +155,11 @@ function render(ctx) {
         ctx.closePath();
         ctx.fill();
     }
-
 }
-
+/**
+ * 画数字
+ */
 function renderDigit(x, y, num, ctx) {
-
     ctx.fillStyle = "rgb(0,102,153)";
     for (var i = 0; i < digit[num].length; i++) {
         for (var j = 0; j < digit[num][i].length; j++) {
@@ -149,5 +171,4 @@ function renderDigit(x, y, num, ctx) {
             }
         }
     }
-
 }
